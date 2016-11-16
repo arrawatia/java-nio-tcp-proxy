@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 class TcpServerAcceptor implements TcpServerHandler {
 
-    private final static int ACCEPT_BUFFER_SIZE = 1000;
+    private final static int ACCEPT_BUFFER_SIZE = 100 * 1024;
     private final static Logger LOGGER = Logger.getAnonymousLogger();
 
     private final TcpServerConfig config;
@@ -60,6 +60,7 @@ class TcpServerAcceptor implements TcpServerHandler {
 
                 SocketChannel clientChannel;
                 clientChannel = server.accept();
+                clientChannel.socket().setSendBufferSize(128*1024);
 
                 handlers.add(config.getHandlerFactory().create(clientChannel));
             } catch (final IOException exception) {

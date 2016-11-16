@@ -29,7 +29,7 @@ class TcpProxyBuffer {
 
     }
 
-    private final static int BUFFER_SIZE = 1000;
+    private final static int BUFFER_SIZE = 100 * 1024;
 
     private final ByteBuffer buffer = ByteBuffer.allocateDirect(BUFFER_SIZE);
     private BufferState state = BufferState.READY_TO_WRITE;
